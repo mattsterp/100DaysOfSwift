@@ -122,3 +122,41 @@ func checkPassword(_ password: String) throws -> Bool {
 }
 
 // Running throwing functions
+// Swift doesn’t like errors to happen when your program runs, which means it won’t let you run an error-throwing function by accident.
+
+// Instead, you need to call these functions using three new keywords: do starts a section of code that might cause problems, try is used before every function that might throw an error, and catch lets you handle errors gracefully.
+
+// If any errors are thrown inside the do block, execution immediately jumps to the catch block. Let’s try calling checkPassword() with a parameter that throws an error:
+do {
+    try checkPassword("password")
+        print("That password is good")
+} catch {
+    print("You can't use that password")
+}
+
+// When that code runs, “You can’t use that password” is printed, but “That password is good” won’t be – that code will never be reached, because the error is thrown.
+
+// InOut Parameters
+// All parameters passed into a Swift function are constants, so you can’t change them. If you want, you can pass in one or more parameters as inout, which means they can be changed inside your function, and those changes reflect in the original value outside the function.
+
+// For example, if you want to double a number in place – i.e., change the value directly rather than returning a new one – you might write a function like this:
+func doubleInPlace(number: inout Int){
+    number *= 2
+}
+
+// To use that, you first need to make a variable integer – you can’t use constant integers with inout, because they might be changed. You also need to pass the parameter to doubleInPlace using an ampersand, &, before its name, which is an explicit recognition that you’re aware it is being used as inout.
+
+// In code, you’d write this:
+var myNum = 10
+doubleInPlace(number: &myNum)
+
+// function summary
+
+// Functions let us re-use code without repeating ourselves.
+// Functions can accept parameters – just tell Swift the type of each parameter.
+// Functions can return values, and again you just specify what type will be sent back. Use tuples if you want to return several things.
+// You can use different names for parameters externally and internally, or omit the external name entirely.
+// Parameters can have default values, which helps you write less code when specific values are common.
+// Variadic functions accept zero or more of a specific parameter, and Swift converts the input to an array.
+// Functions can throw errors, but you must call them using try and handle errors using catch.
+// You can use inout to change variables inside a function, but it’s usually better to return a new value.
