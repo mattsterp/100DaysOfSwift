@@ -1,5 +1,0 @@
-/*:
- # Swift Notes
- 
- [variables](variables)
- */
